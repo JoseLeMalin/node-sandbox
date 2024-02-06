@@ -5,7 +5,9 @@
   "scripts": {
     "lint": "npx eslint . --ext .js --ext .ts",
     "format": "pnpm exec prettier . --write",
-    "start": "node ./bin/www"
+    "build": "tsc",
+    "dev": "nodemon tsc-node-esm ./dist/app.js",
+    "start": "ts-node-esm ./dist/app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -26,6 +28,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }
 }

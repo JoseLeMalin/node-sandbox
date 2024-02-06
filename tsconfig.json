@@ -13,11 +13,14 @@
     "alwaysStrict": true,
     "esModuleInterop": true,
     "declaration": true,
-    "target": "ES2017",
+    "target": "ES6",
     "jsx": "react",
-    "module": "ESNext",
+    "module": "commonjs",
     "moduleResolution": "node",
   },
-  "include": ["src/*"],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
+  "ts-node": {
+    "esm": true, // «———— enabling ESM for ts-node
+  }, 
 }

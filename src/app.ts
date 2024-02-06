@@ -12,11 +12,11 @@ import { indexRouter } from "./routes/index";
 import { usersRouter } from "./routes/users";
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,7 +32,13 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFunction) => {
+app.use(
+  (
+    err: ErrorRequestHandler,
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
     // set locals, only providing error in development
     try {
       res.locals.message = err.toString();
@@ -46,5 +52,8 @@ app.use((err: ErrorRequestHandler, req: Request, res: Response, next: NextFuncti
     }
   },
 );
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
+});
 
 module.exports = app;
