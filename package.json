@@ -6,8 +6,8 @@
     "lint": "npx eslint . --ext .js --ext .ts",
     "format": "pnpm exec prettier . --write",
     "build": "tsc",
-    "dev": "nodemon tsc-node-esm ./dist/app.js",
-    "start": "ts-node-esm ./dist/app.js"
+    "dev": "nodemon tsc-node ./dist/app.js",
+    "start": "ts-node ./dist/app.js"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

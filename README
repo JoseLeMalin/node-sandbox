@@ -1,5 +1,8 @@
 Useful links: 
   Setup:
-https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
-https://blog.logrocket.com/how-to-set-up-node-typescript-express/
-https://medium.com/@sulistef/how-to-set-up-routing-in-an-express-js-project-using-typescript-6768277d07e6
+    https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
+    https://blog.logrocket.com/how-to-set-up-node-typescript-express/
+    https://medium.com/@sulistef/how-to-set-up-routing-in-an-express-js-project-using-typescript-6768277d07e6
+
+    - Project Hot Reload
+      https://blog.logrocket.com/configuring-nodemon-with-typescript/

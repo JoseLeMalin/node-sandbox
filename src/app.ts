@@ -10,8 +10,9 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { indexRouter } from "./routes/index";
 import { usersRouter } from "./routes/users";
+import { cryptoModuleRouter } from "./routes/crypto-module";
 
-const app = express();
+export const app = express();
 const port = process.env.PORT || 3000;
 
 // view engine setup
@@ -25,6 +26,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/crypto-module", cryptoModuleRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -56,4 +58,4 @@ app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
 
-module.exports = app;
+// module.exports = app;
