@@ -12,6 +12,7 @@ cryptoModuleRouter.get(
       // const result = await handlerHashPassword(req, res);
       res.status(201);
       res.send(`Result crypto module: `);
+      next();
     } catch (error) {
       next(error);
     }
@@ -27,6 +28,23 @@ cryptoModuleRouter.get(
       const result = await handlerCipher();
       res.status(201);
       res.send(`Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`);
+      next();
+    } catch (error) {
+      next(error);
+    }
+  },
+);
+
+cryptoModuleRouter.get(
+  "/decypher",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      console.log("In the cryptomodule get endpoint");
+
+      const result = await handlerCipher();
+      res.status(201);
+      res.send(`Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`);
+      next();
     } catch (error) {
       next(error);
     }

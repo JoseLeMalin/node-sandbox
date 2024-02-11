@@ -6,15 +6,20 @@
     "lint": "npx eslint . --ext .js --ext .ts",
     "format": "pnpm exec prettier . --write",
     "build": "tsc",
-    "dev": "nodemon tsc-node ./dist/app.js",
-    "start": "ts-node ./dist/app.js"
+    "dev": "npx nodemon ts-node dist/app.js --env-file=.env.dev",
+    "start": "node dist/app.js"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^5.9.1",
+    "@prisma/client": "^5.9.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "nodemon": "^3.0.3",
+    "pg": "^8.11.3",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.6",
@@ -23,11 +28,13 @@
     "@types/http-errors": "^2.0.4",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.3",
+    "@types/pg": "^8.11.0",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "prettier": "^3.2.4",
+    "prisma": "^5.9.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   }

@@ -5,47 +5,51 @@ version: '3.8'
 # https://github.com/docker/awesome-compose/tree/master/postgresql-pgadmin
 # docker compose -f .docker/compose.yaml up
 # docker compose -f .docker/compose.yaml down
+name: node-sandbox-container
 services:
-#  youcode-app:
-#    build:
-#      context: ../ 
-#      dockerfile: ./Dockerfile 
-#    container_name: youcode-app
-#    environment:
-#      - POSTGRES_USER=${POSTGRES_USER}
-#      - POSTGRES_PASSWORD=${POSTGRES_PW}
-#      - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
-#    ports:
-#      - "3000:3000"
-#    restart: unless-stopped
-  postgres:
-    container_name: node-sandbox
+  # node-sandbox-app:
+  #   build:
+  #     context: ../ 
+  #     dockerfile: ./Dockerfile 
+  #   container_name: node-sandbox-app
+  #   # environment:
+  #   #   - POSTGRES_USER=${POSTGRES_USER}
+  #   #   - POSTGRES_PASSWORD=${POSTGRES_PW}
+  #   #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
+  #   env_file:
+  #     - ../.env.dev
+  #   ports:
+  #     - "3000:3000"
+  #   restart: unless-stopped
+  node-sandbox-postgres:
+    container_name: node-sandbox-postgres
     image: postgres:15.5-alpine3.18
     restart: unless-stopped
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PW}
-      - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
+    env_file: ../.env.dev
+    # environment:
+    #   - POSTGRES_USER=${POSTGRES_USER}
+    #   - POSTGRES_PASSWORD=${POSTGRES_PW}
+    #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
     hostname: localhost
     ports:
       - "5432:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
-  pgadmin:
-    container_name: youcode-pgadmin
-    image: dpage/pgadmin4:latest
-    depends_on:
-      - postgres
-    environment:
-      - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
-      - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
-    ports:
-      - "5050:80"
-    restart: unless-stopped
+  # pgadmin:
+  #   container_name: youcode-pgadmin
+  #   image: dpage/pgadmin4:latest
+  #   depends_on:
+  #     - postgres
+  #   environment:
+  #     - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+  #     - PGADMIN_DEFAULT_PASSWORD=${PGADMIN_DEFAULT_PASSWORD}
+  #   ports:
+  #     - "5050:80"
+  #   restart: unless-stopped
 
 volumes:
   postgres-data:
 networks:
-  youcode-netw²rk:
+  node-sandbox-network:
     external: true

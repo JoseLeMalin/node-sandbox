@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "rootDir": "./src",
     "outDir": "./dist",
     "allowJs": true,
     "strict": true,
@@ -18,7 +19,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
   },
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/db-postgres/index.js"],
   "exclude": ["node_modules"],
   "ts-node": {
     "esm": true, // «———— enabling ESM for ts-node
