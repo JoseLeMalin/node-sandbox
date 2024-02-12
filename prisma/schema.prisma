@@ -13,19 +13,22 @@ generator client {
 }
 
 model User {
-  id      Int      @id @default(autoincrement())
-  email   String   @unique
-  name    String?
-  role    Role     @default(USER)
-  posts   Post[]
-  profile Profile?
+  id              Int      @id @default(gen_random_uuid())
+  email           String   @unique
+  name            String?
+  password        String   
+  passwordIv      String?   
+  role            Role     @default(USER)
+  posts           Post[]
+  profile         Profile?
 }
 
 model Profile {
   id     Int    @id @default(autoincrement())
   bio    String
-  user   User   @relation(fields: [userId], references: [id])
+
   userId Int    @unique
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Post {
@@ -34,15 +37,22 @@ model Post {
   updatedAt  DateTime   @updatedAt
   title      String
   published  Boolean    @default(false)
-  author     User       @relation(fields: [authorId], references: [id])
+  
   authorId   Int
+  author     User       @relation(fields: [authorId], references: [id])
   categories Category[]
+  tags        Tag[] 
 }
 
 model Category {
-  id    Int    @id @default(autoincrement())
-  name  String
-  posts Post[]
+  id          Int    @id @default(autoincrement())
+  name        String
+  posts       Post[]
+}
+model Tag {
+  id          Int    @id @default(autoincrement())
+  name        String
+  posts       Post[]
 }
 
 enum Role {

@@ -1,25 +1,22 @@
-Useful links: 
-  Setup:
-    https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
-    https://blog.logrocket.com/how-to-set-up-node-typescript-express/
-    https://medium.com/@sulistef/how-to-set-up-routing-in-an-express-js-project-using-typescript-6768277d07e6
-    https://dev.to/wizdomtek/typescript-express-building-robust-apis-with-nodejs-1fln
-    - Project Hot Reload
-      https://blog.logrocket.com/configuring-nodemon-with-typescript/
-
-
-
+Useful links:
+Setup:
+https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
+https://blog.logrocket.com/how-to-set-up-node-typescript-express/
+https://medium.com/@sulistef/how-to-set-up-routing-in-an-express-js-project-using-typescript-6768277d07e6
+https://dev.to/wizdomtek/typescript-express-building-robust-apis-with-nodejs-1fln - Project Hot Reload
+https://blog.logrocket.com/configuring-nodemon-with-typescript/
 
     - TO DO LIST
       - postgres OK
       - Prisma
       - JWT
       - Jest
+      - Swagger
       - Buffer + Fs node module
       - multithread
       - Zod
       - Websockets
       - Kafka
-      
-      
+
+
       - Graphql ?

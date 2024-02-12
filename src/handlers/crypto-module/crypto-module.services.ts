@@ -24,12 +24,12 @@ export const hashTextService = async () => {
   return resultHash;
 };
 export const cipherTextService = async () => {
-  const resultEncrypt = await encrypt("test a encrypt")
+  const resultEncrypt = await encrypt("test a encrypt");
   console.log("ResultEncrypt: ", resultEncrypt);
-  
-  const resultDecrypt = await decrypt(resultEncrypt)
+
+  const resultDecrypt = await decrypt(resultEncrypt);
   console.log("ResultDecrypt: ", resultDecrypt);
-  return {resultEncrypt, resultDecrypt}
+  return { resultEncrypt, resultDecrypt };
 };
 
 // Function to hash a password

@@ -1,7 +1,6 @@
 import { cipherTextService } from "./crypto-module.services";
 
-export const handlerCipher = async (
-) => {
+export const handlerCipher = async () => {
   // console.log("reqSHE: ", req);
   // console.log("resSHE: ", res);
   try {

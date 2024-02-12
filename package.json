@@ -6,14 +6,16 @@
     "lint": "npx eslint . --ext .js --ext .ts",
     "format": "pnpm exec prettier . --write",
     "build": "tsc",
-    "dev": "npx nodemon ts-node dist/app.js --env-file=.env.dev",
+    "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon ts-node dist/app.js",
     "start": "node dist/app.js"
   },
   "dependencies": {
+    "@dotenvx/dotenvx": "^0.15.4",
     "@prisma/adapter-pg": "^5.9.1",
     "@prisma/client": "^5.9.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^16.4.3",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",

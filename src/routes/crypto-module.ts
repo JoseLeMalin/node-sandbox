@@ -27,7 +27,9 @@ cryptoModuleRouter.get(
 
       const result = await handlerCipher();
       res.status(201);
-      res.send(`Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`);
+      res.send(
+        `Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`,
+      );
       next();
     } catch (error) {
       next(error);
@@ -43,7 +45,9 @@ cryptoModuleRouter.get(
 
       const result = await handlerCipher();
       res.status(201);
-      res.send(`Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`);
+      res.send(
+        `Result crypto module: ${result?.resultEncrypt} - ${result?.resultDecrypt}`,
+      );
       next();
     } catch (error) {
       next(error);
