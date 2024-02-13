@@ -3,16 +3,15 @@ import {
   randomBytes,
   createCipheriv,
   createDecipheriv,
-  // createPrivateKey,
+  generateKeyPairSync,
   // generateKeyPairSync,
 } from "crypto";
-// import fs from "fs";
-// import path from "path";
 import {
   algorithm,
   generateSecretKey,
   generateIv,
 } from "../../utils/crypto-module/hooks";
+import { ApiError, messageCode } from "../../utils/express/errors";
 
 export const hashTextService = async () => {
   const hash = randomBytes(16);
@@ -27,9 +26,13 @@ export const cipherTextService = async () => {
   const resultEncrypt = await encrypt("test a encrypt");
   console.log("ResultEncrypt: ", resultEncrypt);
 
-  const resultDecrypt = await decrypt(resultEncrypt);
+  return resultEncrypt;
+};
+
+export const decipherTextService = async (encryptedText: string) => {
+  const resultDecrypt = await decrypt(encryptedText);
   console.log("ResultDecrypt: ", resultDecrypt);
-  return { resultEncrypt, resultDecrypt };
+  return resultDecrypt;
 };
 
 // Function to hash a password
@@ -70,7 +73,7 @@ function verifyPassword(password: string, storedHash: string) {
     if (hashedPassword === storedHash) {
       resolve(true); // Passwords match
     } else {
-      resolve(false); // Passwords do not match
+      reject(false); // Passwords do not match
     }
   });
 }
@@ -102,38 +105,33 @@ const decrypt = async (encryptedText: string) => {
   return decrypted;
 };
 
-// server.get('<route>', async (req, res, next) => {
-// try {
-// const filepath = path.dirname('/v3/cache/');
-// console.log('filepath: ', filepath);
-// console.log('filepat2: ', `${filepath}/cache/key-filename.pem`);
-// const file = fs.readFileSync(`${filepath}/cache/key-filename.pem`,
-// { encoding: 'utf8' });
-//
-// const privateKeyFirst = createPrivateKey({
-// key: file,
-// passphrase: 'Passw0rd1', // passphraase has to be the real one
-// });
-// console.log('privateKeyFirst: ', privateKeyFirst);
-//
-// const { publicKey, privateKey } = generateKeyPairSync('rsa', {
-// modulusLength: 4096,
-// publicKeyEncoding: {
-// type: 'spki',
-// format: 'pem',
-// },
-// privateKeyEncoding: {
-// type: 'pkcs8',
-// format: 'pem',
-// cipher: 'aes-256-cbc',
-// passphrase: 'top secret',
-// },
-// });
-// console.log('publicKey: ', publicKey);
-// console.log('privateKey: ', privateKey);
-// res.status(200);
-// res.send();
-// } catch (error) {
-// console.error('Error: ', error);
-// next(error);
-// }
+export const generatePemService = async () => {
+  if (!process.env.JWT_PASSPHRASE)
+    throw new ApiError(
+      404,
+      messageCode.MISSING_ENV_VARIABLE,
+      "Env variable passphrase not found",
+    );
+
+  // const privateKeyFirst = createPrivateKey({
+  //   key: file,
+  //   passphrase: "Passw0rd1", // passphraase has to be the real one
+  // });
+  // console.log("privateKeyFirst: ", privateKeyFirst);
+
+  const { publicKey, privateKey } = generateKeyPairSync("rsa", {
+    modulusLength: 4096,
+    publicKeyEncoding: {
+      type: "spki",
+      format: "pem",
+    },
+    privateKeyEncoding: {
+      type: "pkcs8",
+      format: "pem",
+      cipher: "aes-256-cbc",
+      passphrase: "top secret",
+    },
+  });
+  console.log("publicKey: ", publicKey);
+  console.log("privateKey: ", privateKey);
+};

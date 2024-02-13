@@ -1,21 +1,21 @@
-import { Pool } from "pg";
-import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "@prisma/client";
+// import { Pool } from "pg";
+// import { PrismaPg } from "@prisma/adapter-pg";
+// import { PrismaClient } from "@prisma/client";
 //
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const pool = new Pool({
-  user: process.env.POSTGRESDB_USER,
-  host: process.env.HOST,
-  database: process.env.POSTGRESDB_DATABASE,
-  password: process.env.POSTGRES_PASSWORD,
-  port: process.env.POSTGRESDB_DOCKER_PORT
-    ? parseInt(process.env.POSTGRESDB_DOCKER_PORT)
-    : 5432,
-  connectionString,
-});
-const adapter = new PrismaPg(pool); // Error with Typescript compil
-export const prisma = new PrismaClient({ adapter });
+// const connectionString = `${process.env.DATABASE_URL}`;
+//
+// const pool = new Pool({
+//   user: process.env.POSTGRESDB_USER,
+//   host: process.env.HOST,
+//   database: process.env.POSTGRESDB_DATABASE,
+//   password: process.env.POSTGRES_PASSWORD,
+//   port: process.env.POSTGRESDB_DOCKER_PORT
+//     ? parseInt(process.env.POSTGRESDB_DOCKER_PORT)
+//     : 5432,
+//   connectionString,
+// });
+// const adapter = new PrismaPg(pool); // Error with Typescript compil
+// export const prisma = new PrismaClient({ adapter });
 
 // const pool = new Pool({
 //   user: process.env.POSTGRESDB_USER,
