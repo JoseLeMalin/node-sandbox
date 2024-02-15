@@ -7,7 +7,8 @@
     "format": "pnpm exec prettier src/ --write",
     "build": "tsc",
     "seed": "npx ts-node prisma/seeders/users.ts",
-    "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon ts-node dist/app.js",
+    "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon src/app.ts",
+    "devbis": "npx @dotenvx/dotenvx run --env-file=.env.dev -- node --loader ts-node/esm src/app.ts",
     "start": "node dist/app.js"
   },
   "dependencies": {
@@ -37,6 +38,7 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.3",
     "@types/pg": "^8.11.0",
+    "@types/uuid": "^9.0.8",
     "@typescript-eslint/eslint-plugin": "^6.20.0",
     "@typescript-eslint/parser": "^6.20.0",
     "eslint": "^8.56.0",

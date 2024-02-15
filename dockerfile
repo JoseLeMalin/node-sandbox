@@ -28,7 +28,7 @@
 # ne the command to run your application
 # pnpm", "dev"]
 
-FROM node:20-alpine
+FROM node:18.17.0
 # Set the working directory in the container
 WORKDIR /app
 # Copy package.json and pnpm-lock.yaml

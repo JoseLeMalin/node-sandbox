@@ -3,5 +3,6 @@
   "ignore": ["*.test.js"],
   "execMap": {
     "ts": "ts-node"
-  }
+  },
+  "exec": "pnpm run devbis"
 }
