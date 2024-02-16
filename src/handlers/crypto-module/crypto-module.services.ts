@@ -79,7 +79,7 @@ function verifyPassword(password: string, storedHash: string) {
 }
 
 // Function to encrypt a string
-const encrypt = async (text: string) => {
+export const encrypt = async (text: string) => {
   const [secretKey, iv] = await Promise.all([
     generateSecretKey(),
     generateIv(),
@@ -92,7 +92,7 @@ const encrypt = async (text: string) => {
 };
 
 // Function to decrypt an encrypted string
-const decrypt = async (encryptedText: string) => {
+export const decrypt = async (encryptedText: string) => {
   const [ivpassword, passworduser] = encryptedText.split(":");
   const secretKey = await generateSecretKey();
   const decipher = createDecipheriv(

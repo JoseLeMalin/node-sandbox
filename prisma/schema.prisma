@@ -1,45 +1,39 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// schema.prisma
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["driverAdapters"]
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model User {
-  id              String      @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  email           String      @unique
-  name            String
-  password        String
-  passwordIv      String
-  refreshTokens   RefreshToken[]
-  role            Role     @default(USER)
-  posts           Post[]
-  profile         Profile?
+  id            String         @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email         String         @unique
+  name          String
+  password      String
+  role          Role           @default(USER)
+  posts         Post[]
+  profile       Profile?
+  refreshTokens RefreshToken[]
 }
 
 model RefreshToken {
-  id          String    @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   hashedToken String
-  userId      String    @db.Uuid
-  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  revoked     Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  userId      String   @db.Uuid
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Profile {
-  id     String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   bio    String
-
-  userId String     @unique @db.Uuid
-  user   User       @relation(fields: [userId], references: [id])
+  userId String @unique @db.Uuid
+  user   User   @relation(fields: [userId], references: [id])
 }
 
 model Post {
@@ -49,22 +43,22 @@ model Post {
   title      String
   published  Boolean    @default(false)
   content    String
-  
   authorId   String     @db.Uuid
   author     User       @relation(fields: [authorId], references: [id])
-  categories Category[]
-  tags        Tag[] 
+  categories Category[] @relation("CategoryToPost")
+  tags       Tag[]      @relation("PostToTag")
 }
 
 model Category {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String
-  posts       Post[]
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+  posts Post[] @relation("CategoryToPost")
 }
+
 model Tag {
-  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name        String
-  posts       Post[]
+  id    String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name  String
+  posts Post[] @relation("PostToTag")
 }
 
 enum Role {

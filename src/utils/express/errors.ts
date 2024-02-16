@@ -1,6 +1,7 @@
 import { ErrorRequestHandler } from "express-serve-static-core";
 
 export enum messageCode {
+  WRONG_QUERY_PARAMS = "WRONG_QUERY_PARAMS",
   CREDENTIALS_NOT_SATISFYING = "CREDENTIALS_NOT_SATISFYING",
   FILEREAD_FAILED = "FILEREAD_FAILED",
   MISSING_ENV_VARIABLE = "MISSING_ENV_VARIABLE",

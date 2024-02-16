@@ -6,12 +6,21 @@ import {
 } from "./users.services";
 import { z } from "zod";
 import { ApiError, messageCode } from "../../utils/express/errors";
+
 export const userLoginHandler = async (req: Request, res: Response) => {
-  //  console.log(req);
+  const userLoginSchema = z.object({
+    email: z.string(),
+    password: z.string(),
+  });
+  const parsedBody = await userLoginSchema.safeParseAsync(req.body);
+  if (!parsedBody.success)
+    throw new ApiError(
+      404,
+      messageCode.WRONG_QUERY_PARAMS,
+      "Data provided from client do not respect expected inputs",
+    );
 
-  // console.log(res);
-
-  await loginService();
+  const result = await loginService(req.body.email, req.body.password);
 };
 
 export const userCreate = async (req: Request, res: Response) => {
@@ -19,7 +28,7 @@ export const userCreate = async (req: Request, res: Response) => {
     const userSchema = z.object({
       email: z.string(),
       password: z.string(),
-      passwordIv: z.string(),
+      // passwordIv: z.string(),
       name: z.string(),
       // age: z.number(),
       role: z.nativeEnum(Role),
@@ -27,15 +36,11 @@ export const userCreate = async (req: Request, res: Response) => {
 
     const userToCreate = userSchema.parse(req.body);
     console.log(" userToCreate SHE: ", userToCreate);
-    
+
     const createdUser = await createUserByEmailAndPasswordService(userToCreate);
     console.log("createdUser SHE: ", createdUser);
-    
+    return createdUser;
   } catch (error) {
-    throw new ApiError(
-      501,
-      messageCode.CREDENTIALS_NOT_SATISFYING,
-      error,
-    );
+    throw new ApiError(501, messageCode.CREDENTIALS_NOT_SATISFYING, error);
   }
 };

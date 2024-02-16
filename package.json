@@ -8,7 +8,7 @@
     "build": "tsc",
     "seed": "npx ts-node prisma/seeders/users.ts",
     "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon src/app.ts",
-    "devbis": "pnpx @dotenvx/dotenvx run --env-file=.env.dev -- node --loader ts-node/esm src/app.ts",
+    "devbis": "npx @dotenvx/dotenvx run --env-file=.env.dev -- node --loader ts-node/esm src/app.ts",
     "start": "node dist/app.js"
   },
   "dependencies": {

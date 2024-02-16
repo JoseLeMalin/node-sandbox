@@ -19,7 +19,7 @@ usersRouter.get(
   },
 );
 
-usersRouter.get(
+usersRouter.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -37,10 +37,10 @@ usersRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await userCreate(req, res);
+      const createdUser = await userCreate(req, res);
 
       res.status(201);
-      res.send(`respond with a resource`);
+      res.send(createdUser);
     } catch (error) {
       next(error);
     }
