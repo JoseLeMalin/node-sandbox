@@ -3,6 +3,7 @@ import { User, Role } from "@prisma/client";
 import {
   loginService,
   createUserByEmailAndPasswordService,
+  validateJWTService,
 } from "./users.services";
 import { z } from "zod";
 import { ApiError, messageCode } from "../../utils/express/errors";

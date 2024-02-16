@@ -1,6 +1,6 @@
 import express from "express";
 import { Request, Response, NextFunction } from "express";
-import { userCreate, userLoginHandler } from "../handlers/users/users.handlers";
+import { userCreate, userLoginHandler, validateJWTHandler } from "../handlers/users/users.handlers";
 
 export const usersRouter = express.Router();
 

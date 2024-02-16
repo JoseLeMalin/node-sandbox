@@ -8,6 +8,7 @@ import { indexRouter } from "./routes/index";
 import { usersRouter } from "./routes/users";
 import { cryptoModuleRouter } from "./routes/crypto-module";
 import { errorHandler } from "./utils/express/errors";
+import { authRouter } from "./routes/auth.routes";
 
 export const app = express();
 const port = process.env.PORT || 3000;
@@ -25,6 +26,7 @@ app.use(errorHandler);
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
+app.use("/auth", authRouter);
 app.use("/crypto-module", cryptoModuleRouter);
 
 // catch 404 and forward to error handler
