@@ -21,7 +21,7 @@ export const userCreate = async (req: Request, res: Response) => {
       password: z.string(),
       passwordIv: z.string(),
       name: z.string(),
-      age: z.number(),
+      // age: z.number(),
       role: z.nativeEnum(Role),
     });
 
