@@ -20,7 +20,7 @@ export const userLoginHandler = async (req: Request, res: Response) => {
       "Data provided from client do not respect expected inputs",
     );
 
-  const result = await loginService(req.body.email, req.body.password);
+  return await loginService(req.body.email, req.body.password);
 };
 
 export const userCreate = async (req: Request, res: Response) => {

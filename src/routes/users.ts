@@ -23,10 +23,10 @@ usersRouter.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      await userLoginHandler(req, res);
+      const result = await userLoginHandler(req, res);
 
       res.status(201);
-      res.send(`respond with a resource`);
+      res.send(result );
     } catch (error) {
       next(error);
     }
