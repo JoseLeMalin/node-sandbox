@@ -9,6 +9,10 @@ https://blog.logrocket.com/configuring-nodemon-with-typescript/
 Prisma: 
   https://www.prisma.io/blog/satisfies-operator-ur8ys8ccq7zb#infer-prisma-output-types-without-prismavalidator
 
+Security Best practices:
+  https://curity.io/resources/learn/api-security-best-practices/
+  Opaque tokens: https://cloudentity.com/developers/basics/tokens/opaque-token/
+
     - TO DO LIST
       - postgres OK
       - Prisma WIP

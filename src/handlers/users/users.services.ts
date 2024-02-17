@@ -30,16 +30,16 @@ export const loginService = async (email: string, password: string) => {
 };
 
 export const createUserByEmailAndPasswordService = async (user: CreateUser) => {
-  const encryptedPwd = await encrypt(user.password);
+
   // const hash = createHash("sha256");
   // const hashedPwd = hash.update(user.password);
   return prisma.user.create({
-    data: { ...user, id: v4(), password: encryptedPwd },
+    data: { ...user, id: v4() },
   });
 };
 
 export const validateJWTService = async (jwt: string) => {
-  const generatedToken = await generateAccessToken({ id: jwt });
+  // const generatedToken = await generateAccessToken({ id: jwt });
 
-  return generatedToken;
+  // return generatedToken;
 };

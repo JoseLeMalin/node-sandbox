@@ -3,6 +3,7 @@
     "rootDir": "./src",
     "outDir": "./dist",
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "strict": true,
     "noImplicitAny": true,
     "sourceMap": true,
