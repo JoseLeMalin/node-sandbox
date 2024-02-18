@@ -14,7 +14,7 @@ import { z } from "zod";
 // };
 
 // export type CreateUser = Omit<User, "id">;
-const schemaCreateUser = z.object({
+export const schemaCreateUser = z.object({
   // id: z.string(),
   email: z.string(),
   name: z.string(),

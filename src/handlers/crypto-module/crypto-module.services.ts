@@ -13,33 +13,18 @@ import {
 } from "../../utils/crypto-module/hooks";
 import { ApiError, messageCode } from "../../utils/express/errors";
 
-export const hashTextService = async () => {
+export const hashTextService = async (inputText: string) => {
   const hash = randomBytes(16);
-  const resultHash = await hashPassword("passwordtestShe", hash);
+  const resultHash = await hashText(inputText, hash);
   console.log("resultHash: ", resultHash);
-  const resultVerify = await verifyPassword("passwordtestShe", resultHash);
-  console.log("resultVerify : ", resultVerify);
+  // const resultVerify = await verifyPassword(inputText, resultHash);
+  // console.log("resultVerify : ", resultVerify);
 
   return resultHash;
 };
-export const cipherTextService = async () => {
-  const resultEncrypt = await encrypt("test a encrypt");
-  console.log("ResultEncrypt: ", resultEncrypt);
-
-  return resultEncrypt;
-};
-
-export const decipherTextService = async (encryptedText: string) => {
-  const resultDecrypt = await decrypt(encryptedText);
-  console.log("ResultDecrypt: ", resultDecrypt);
-  return resultDecrypt;
-};
 
 // Function to hash a password
-const hashPassword = async (
-  password: string,
-  salt: Buffer,
-): Promise<string> => {
+const hashText = async (password: string, salt: Buffer): Promise<string> => {
   return new Promise((resolve, reject) => {
     try {
       const hash = createHash("sha256");
@@ -61,22 +46,38 @@ const hashPassword = async (
 };
 
 // Function to verify a password
-function verifyPassword(password: string, storedHash: string) {
-  return new Promise((resolve, reject) => {
+export const verifyPassword = (password: string, storedHash: string) => {
+  return new Promise<boolean>((resolve, reject) => {
+    console.log("hash", storedHash);
     const hash = createHash("sha256");
+    console.log("hash", hash);
 
     // Generate the hash of the provided password
     hash.update(password);
+    console.log("hash update", hash);
     const hashedPassword = hash.digest("hex");
+    console.log("hashedPassword", hashedPassword);
+    console.log("hashedPassword === storedHash", hashedPassword === storedHash);
 
     // Compare the generated hash with the stored hash
-    if (hashedPassword === storedHash) {
-      resolve(true); // Passwords match
-    } else {
-      reject(false); // Passwords do not match
-    }
+    if (hashedPassword === storedHash) return resolve(true); // Passwords match
+
+    return reject(false); // Passwords do not match
   });
-}
+};
+
+export const cipherTextService = async () => {
+  const resultEncrypt = await encrypt("test a encrypt");
+  console.log("ResultEncrypt: ", resultEncrypt);
+
+  return resultEncrypt;
+};
+
+export const decipherTextService = async (encryptedText: string) => {
+  const resultDecrypt = await decrypt(encryptedText);
+  console.log("ResultDecrypt: ", resultDecrypt);
+  return resultDecrypt;
+};
 
 // Function to encrypt a string
 export const encrypt = async (text: string) => {
@@ -120,16 +121,16 @@ export const generatePemService = async () => {
   // console.log("privateKeyFirst: ", privateKeyFirst);
 
   const { publicKey, privateKey } = generateKeyPairSync("rsa", {
-    modulusLength: 4096,
+    modulusLength: 2048,
     publicKeyEncoding: {
-      type: "spki",
+      type: "spki", // It is recommended to encode public keys as 'spki'
       format: "pem",
     },
     privateKeyEncoding: {
-      type: "pkcs8",
+      type: "pkcs8", // private keys as 'pkcs8' with encryption for long-term storage
       format: "pem",
       cipher: "aes-256-cbc",
-      passphrase: "top secret",
+      passphrase: process.env.JWT_PASSPHRASE,
     },
   });
   console.log("publicKey: ", publicKey);

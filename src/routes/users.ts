@@ -19,19 +19,19 @@ usersRouter.get(
   },
 );
 
-usersRouter.post(
-  "/login",
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const result = await userLoginHandler(req, res);
-
-      res.status(201);
-      res.send(result );
-    } catch (error) {
-      next(error);
-    }
-  },
-);
+// usersRouter.post(
+//   "/anothertest",
+//   async (req: Request, res: Response, next: NextFunction) => {
+//     try {
+//       const result = await userLoginHandler(req, res);
+// 
+//       res.status(201);
+//       res.send(result );
+//     } catch (error) {
+//       next(error);  
+//     }
+//   },
+// );
 
 usersRouter.post(
   "/",
