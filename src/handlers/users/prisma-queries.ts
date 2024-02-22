@@ -1,4 +1,4 @@
-import { Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { prisma as prismaClient } from "../../lib/prisma";
 
 const userValidator = Prisma.validator(

@@ -1,6 +1,6 @@
 // import { describe, expect, test } from "@jest/globals";
 
-export const sum = (a: number, b: number) => {
+export const sum = (a, b) => {
   return a + b;
 };
 
