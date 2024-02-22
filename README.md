@@ -1,3 +1,19 @@
+    - TO DO LIST
+      - postgres OK
+      - Prisma WIP
+      - JWT WIP <= Will have to go work again on that
+      - Zod WIP
+      - Jest
+      - Websockets
+      - Swagger
+      - Buffer + Fs node module
+      - multithread
+      - Kafka
+
+
+      - Graphql ?
+
+
 Useful links:
 Setup:
 https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
@@ -13,17 +29,5 @@ Security Best practices:
   https://curity.io/resources/learn/api-security-best-practices/
   Opaque tokens: https://cloudentity.com/developers/basics/tokens/opaque-token/
 
-    - TO DO LIST
-      - postgres OK
-      - Prisma WIP
-      - JWT WIP
-      - Zod WIP
-      - Jest
-      - Websockets
-      - Swagger
-      - Buffer + Fs node module
-      - multithread
-      - Kafka
-
-
-      - Graphql ?
+Jest: 
+    https://blog.logrocket.com/testing-typescript-apps-using-jest/
