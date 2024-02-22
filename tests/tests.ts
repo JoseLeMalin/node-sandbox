@@ -1,6 +1,6 @@
 // import { describe, expect, test } from "@jest/globals";
 // https://blog.logrocket.com/testing-typescript-apps-using-jest/
-export const sum = (a, b) => {
+export const sum = (a: number, b: number) => {
   return a + b;
 };
 
