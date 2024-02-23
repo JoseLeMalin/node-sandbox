@@ -1,18 +1,14 @@
-import { Request, Response } from "express";
-import { User, Role } from "@prisma/client";
+import { Request } from "express";
 import {
   loginService,
   createUserByEmailAndPasswordService,
-  validateJWTService,
 } from "./users.services";
 import { z } from "zod";
 import { ApiError, messageCode } from "../../utils/express/errors";
-import { generateAccessToken, generateTokens } from "../../utils/jwt/jwt";
-import { v4 } from "uuid";
-import { encrypt, hashTextService } from "../crypto-module/crypto-module.services";
+import { hashTextService } from "../crypto-module/crypto-module.services";
 import { schemaCreateUser } from "../../types/Users";
 
-export const userLoginHandler = async (req: Request, res: Response) => {
+export const userLoginHandler = async (req: Request) => {
   const userLoginSchema = z.object({
     email: z.string(),
     password: z.string(),
@@ -28,15 +24,14 @@ export const userLoginHandler = async (req: Request, res: Response) => {
   return await loginService(parsedBody.data.email, parsedBody.data.password);
 };
 
-export const userCreate = async (req: Request, res: Response) => {
+export const userCreate = async (req: Request) => {
   try {
-
     const userToCreate = schemaCreateUser.parse(req.body);
     console.log(" userToCreate SHE: ", userToCreate);
     const hashedPwd = await hashTextService(req.body.password);
     // const userId = v4();
     // const { accessToken, refreshToken } = await generateTokens(userId, v4());
-    
+
     userToCreate.password = hashedPwd;
     const createdUser = await createUserByEmailAndPasswordService(userToCreate);
     console.log("createdUser SHE: ", createdUser);

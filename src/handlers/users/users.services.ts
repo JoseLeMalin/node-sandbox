@@ -1,33 +1,29 @@
 import { prisma } from "../../lib/prisma";
 import { v4 } from "uuid";
 import { CreateUser } from "../../types/Users";
-import {
-  decrypt,
-  encrypt,
-  verifyPassword,
-} from "../crypto-module/crypto-module.services";
+import { verifyPassword } from "../crypto-module/crypto-module.services";
 import { findUserByEmail } from "./prisma-queries";
 import { ApiError, messageCode } from "../../utils/express/errors";
-import { generateAccessToken } from "../../utils/jwt/jwt";
 
 export const loginService = async (email: string, password: string) => {
   // const token = await generateAccessToken();
   try {
-    
-
-  console.log("SHE: ");
-  const user = await findUserByEmail(email);
-  if (!user)
+    console.log("SHE: ");
+    const user = await findUserByEmail(email);
+    if (!user)
+      throw new ApiError(
+        404,
+        messageCode.CREDENTIALS_NOT_SATISFYING,
+        "Wrong email or password",
+      );
+    return verifyPassword(password, user.password);
+  } catch (error) {
     throw new ApiError(
-      404,
+      405,
       messageCode.CREDENTIALS_NOT_SATISFYING,
       "Wrong email or password",
     );
-  return verifyPassword(password, user.password);
-} catch (error) {
-    throw new ApiError(405, messageCode.CREDENTIALS_NOT_SATISFYING, "Wrong email or password");
-    
-}
+  }
   // const decryptedUserPwd = await decrypt(user.password);
   // if (hashedVerify !== password)
   //   throw new ApiError(
@@ -48,6 +44,7 @@ export const createUserByEmailAndPasswordService = async (user: CreateUser) => {
 };
 
 export const validateJWTService = async (jwt: string) => {
+  console.log("jwt: ", jwt);
   // const generatedToken = await generateAccessToken({ id: jwt });
   // return generatedToken;
 };

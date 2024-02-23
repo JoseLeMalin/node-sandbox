@@ -24,11 +24,11 @@ usersRouter.get(
 //   async (req: Request, res: Response, next: NextFunction) => {
 //     try {
 //       const result = await userLoginHandler(req, res);
-// 
+//
 //       res.status(201);
 //       res.send(result );
 //     } catch (error) {
-//       next(error);  
+//       next(error);
 //     }
 //   },
 // );
@@ -37,7 +37,7 @@ usersRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const createdUser = await userCreate(req, res);
+      const createdUser = await userCreate(req);
 
       res.status(201);
       res.send(createdUser);

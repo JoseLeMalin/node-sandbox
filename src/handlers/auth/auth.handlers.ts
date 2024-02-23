@@ -1,9 +1,9 @@
 import { z } from "zod";
 import { validateJWTService } from "../users/users.services";
-import { Request, Response } from "express";
+import { Request } from "express";
 import { ApiError, messageCode } from "../../utils/express/errors";
 
-export const validateJWTHandler = async (req: Request, res: Response) => {
+export const validateJWTHandler = async (req: Request) => {
   console.log("req.body.id SHE: ", req.body.id);
   const jwtSchema = z.object({
     id: z.string(),

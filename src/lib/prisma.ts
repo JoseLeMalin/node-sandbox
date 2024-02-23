@@ -8,12 +8,9 @@ import { Pool } from "pg";
  * npx prisma db pull
  * npx prisma generate
  * npx prisma db push
- * 
- * 
- *  */ 
-
-
-
+ *
+ *
+ *  */
 
 const connectionString = `${process.env.DATABASE_URL}`;
 

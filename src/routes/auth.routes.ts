@@ -9,7 +9,7 @@ authRouter.get(
   "/jwt-tests",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const createdUser = await validateJWTHandler(req, res);
+      const createdUser = await validateJWTHandler(req);
 
       res.status(201);
       res.send(createdUser);
@@ -23,7 +23,7 @@ authRouter.post(
   "/jwt-tests",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const createdUser = await validateJWTHandler(req, res);
+      const createdUser = await validateJWTHandler(req);
 
       res.status(201);
       res.send(createdUser);
@@ -37,13 +37,13 @@ authRouter.post(
   "/login",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
-      const result = await userLoginHandler(req, res);
+      const result = await userLoginHandler(req);
 
       res.status(201);
       res.send(result);
     } catch (error) {
       console.log("Here in the error ?");
-      
+
       next(error);
     }
   },
