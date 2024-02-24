@@ -3,7 +3,7 @@
       - Prisma WIP
       - JWT WIP <= Will have to go work again on that
       - Zod WIP
-      - Jest
+      - Jest Initialized
       - Websockets
       - Swagger
       - Buffer + Fs node module

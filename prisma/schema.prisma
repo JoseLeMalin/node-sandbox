@@ -20,13 +20,13 @@ model User {
 }
 
 model RefreshToken {
-  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  hashedToken String
-  userId      String   @db.Uuid
-  revoked     Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String    @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  hashedToken String  
+  userId      String    @db.Uuid
+  revoked     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Profile {
@@ -64,4 +64,78 @@ model Tag {
 enum Role {
   USER
   ADMIN
+}
+
+model CardAtomic {
+  id                        String     @id  @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt                 DateTime   @default(now())
+  updatedAt                 DateTime   @updatedAt
+  asciiName                 String?
+  attractionLights          Int[]
+  colorIdentity             String[]
+  colorIndicator            String[]
+  colors                    String[]
+  convertedManaCost         Int
+  defense                   String?
+  edhrecRank                Int?
+  edhrecSaltiness           Int?
+  faceConvertedManaCost     Int?
+  faceManaValue             Int?
+  faceName                  String?
+  firstPrinting             DateTime?
+  foreignData               ForeignData[]
+  hand                      String?
+  hasAlternativeDeckLimit   Boolean?  @default(false)
+  isFunny                   Boolean
+  isReserved                Boolean
+  keywords                  String[]
+  layout                    String
+  leadershipSkills          LeadershipSkills?
+  life                      String?
+  loyalty                   String?
+  manaCost                  String?
+  manaValue                 Int
+  name                      String
+  power                     String?
+  printings                 String[]
+  rulings                   Rulings[]
+  side                      String?
+  subsets                   String[]
+  subtypes                  String[]
+  supertypes                String[]
+  text                      String?
+  toughness                 String?
+  type                      String
+  types                     String[]
+
+}
+
+model ForeignData {
+  id            String     @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name          String
+  faceName      String?
+  flavorText    String?
+  language      String?
+  multiverseId  Int?
+  text          String?
+  type          String?
+  cardId        String      @unique @db.Uuid
+  card          CardAtomic  @relation(fields: [cardId], references: [id])
+}
+
+model LeadershipSkills {
+  id          String      @id  @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  brawl       Boolean     @default(false)
+  commander   Boolean     @default(false)
+  oathbreaker Boolean     @default(false)
+  cardId      String      @unique @db.Uuid
+  card        CardAtomic  @relation(fields: [cardId], references: [id])
+}
+
+model Rulings {
+  id          String      @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  date        String
+  text        String
+  cardId      String      @unique @db.Uuid
+  card        CardAtomic  @relation(fields: [cardId], references: [id])
 }
