@@ -6,7 +6,7 @@
     "lint": "npx eslint src/ --ext .js --ext .ts",
     "format": "pnpm exec prettier src/ --write",
     "build": "tsc -p .",
-    "seed": "npx ts-node ./prisma/seeders/users.ts",
+    "seed": "npx ts-node ./prisma/seeders/mtg-cards.ts",
     "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon src/app.ts",
     "devbis&": "npx @dotenvx/dotenvx run --env-file=.env.dev -- node --loader tsx watch src/app.ts",
     "devbis": "pnpx @dotenvx/dotenvx run --env-file=.env.dev -- ts-node src/app.ts",

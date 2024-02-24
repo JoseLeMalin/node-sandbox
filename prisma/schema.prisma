@@ -20,13 +20,13 @@ model User {
 }
 
 model RefreshToken {
-  id          String    @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  hashedToken String  
-  userId      String    @db.Uuid
-  revoked     Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-  User        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  hashedToken String
+  userId      String   @db.Uuid
+  revoked     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  User        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Profile {
@@ -61,81 +61,129 @@ model Tag {
   posts Post[] @relation("PostToTag")
 }
 
-enum Role {
-  USER
-  ADMIN
+model CardSet {
+  id                      String            @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt               DateTime          @default(now())
+  updatedAt               DateTime          @updatedAt
+  asciiName               String?
+  attractionLights        Int[]
+  borderColor             String
+  colorIdentity           String[]
+  colorIndicator          String[]
+  colors                  String[]
+  convertedManaCost       Int
+  defense                 String?
+  edhrecRank              Int?
+  edhrecSaltiness         Int?
+  faceConvertedManaCost   Int?
+  faceManaValue           Int?
+  faceName                String?
+  finishes                String[]
+  firstPrinting           DateTime?
+  flavorText              String?
+  frameVersion            String
+  hand                    String?
+  hasAlternativeDeckLimit Boolean?          @default(false)
+  hasFoil                 Boolean
+  hasNonFoil              Boolean
+  isFunny                 Boolean?
+  isReserved              Boolean?
+  keywords                String[]
+  language                String
+  layout                  String
+  life                    String?
+  loyalty                 String?
+  manaCost                String?
+  manaValue               Int
+  name                    String
+  number                  String
+  otherFaceIds            String[]
+  power                   String?
+  printings               String[]
+  rarity                  String
+  side                    String?
+  subsets                 String[]
+  subtypes                String[]
+  supertypes              String[]
+  text                    String?
+  toughness               String?
+  type                    String
+  types                   String[]
+  artists                 ArtistsOfCard?
+  CardInSet               CardInSet?
+  foreignData             ForeignData?
+  leadershipSkills        LeadershipSkills?
+  rulings                 Rulings?
 }
 
-model CardAtomic {
-  id                        String     @id  @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt                 DateTime   @default(now())
-  updatedAt                 DateTime   @updatedAt
-  asciiName                 String?
-  attractionLights          Int[]
-  colorIdentity             String[]
-  colorIndicator            String[]
-  colors                    String[]
-  convertedManaCost         Int
-  defense                   String?
-  edhrecRank                Int?
-  edhrecSaltiness           Int?
-  faceConvertedManaCost     Int?
-  faceManaValue             Int?
-  faceName                  String?
-  firstPrinting             DateTime?
-  foreignData               ForeignData[]
-  hand                      String?
-  hasAlternativeDeckLimit   Boolean?  @default(false)
-  isFunny                   Boolean
-  isReserved                Boolean
-  keywords                  String[]
-  layout                    String
-  leadershipSkills          LeadershipSkills?
-  life                      String?
-  loyalty                   String?
-  manaCost                  String?
-  manaValue                 Int
-  name                      String
-  power                     String?
-  printings                 String[]
-  rulings                   Rulings[]
-  side                      String?
-  subsets                   String[]
-  subtypes                  String[]
-  supertypes                String[]
-  text                      String?
-  toughness                 String?
-  type                      String
-  types                     String[]
+model Artist {
+  id       String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name     String
+  lastName String
+  cards    ArtistsOfCard?
+}
 
+model ArtistsOfCard {
+  cardId     String   @unique @db.Uuid
+  artistId   String   @unique @db.Uuid
+  assignedAt DateTime @default(now())
+  assignedBy String
+  artist     Artist   @relation(fields: [artistId], references: [id])
+  card       CardSet  @relation(fields: [cardId], references: [id])
+
+  @@id([cardId, artistId])
+}
+
+model Set {
+  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  code        String
+  languages   String[]
+  type        String
+  releaseDate DateTime
+  CardInSet   CardInSet?
+}
+
+model CardInSet {
+  cardId String  @unique @db.Uuid
+  setId  String  @unique @db.Uuid
+  card   CardSet @relation(fields: [cardId], references: [id])
+  set    Set     @relation(fields: [setId], references: [id])
+
+  @@id([cardId, setId])
 }
 
 model ForeignData {
-  id            String     @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  name          String
-  faceName      String?
-  flavorText    String?
-  language      String?
-  multiverseId  Int?
-  text          String?
-  type          String?
-  cardId        String      @unique @db.Uuid
-  card          CardAtomic  @relation(fields: [cardId], references: [id])
+  id           String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name         String
+  faceName     String?
+  flavorText   String?
+  language     String?
+  multiverseId Int?
+  text         String?
+  type         String?
+  cardId       String  @unique @db.Uuid
+  card         CardSet @relation(fields: [cardId], references: [id])
 }
 
 model LeadershipSkills {
-  id          String      @id  @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  brawl       Boolean     @default(false)
-  commander   Boolean     @default(false)
-  oathbreaker Boolean     @default(false)
-  cardId      String      @unique @db.Uuid
-  card        CardAtomic  @relation(fields: [cardId], references: [id])
+  id          String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  brawl       Boolean @default(false)
+  commander   Boolean @default(false)
+  oathbreaker Boolean @default(false)
+  cardId      String  @unique @db.Uuid
+  card        CardSet @relation(fields: [cardId], references: [id])
 }
 
 model Rulings {
-  id          String      @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  date        String
-  text        String
-  cardId      String      @unique @db.Uuid
-  card        CardAtomic  @relation(fields: [cardId], references: [id])
+  id     String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  date   String
+  text   String
+  cardId String  @unique @db.Uuid
+  card   CardSet @relation(fields: [cardId], references: [id])
+}
+
+enum Role {
+  USER
+  ADMIN
 }

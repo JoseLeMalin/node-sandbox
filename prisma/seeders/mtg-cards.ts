@@ -1,34 +1,143 @@
 import { prisma } from "../../src/lib/prisma";
-import { faker } from "@faker-js/faker";
-import dayjs from "dayjs";
 import { v4 } from "uuid";
 
-
 async function main() {
-    const postAlice = await prisma.cardAtomic.upsert({
-      where: { id: "null" },
-      update: {},
-      create: {
-        id: v4(),
-        
-      },
-    });
-    const postBob = await prisma.post.upsert({
-      where: { id: "null" },
-      update: {},
-      create: {
-        
-      },
-    });
-    console.log("Performed seed users.ts: ", { postAlice, postBob });
-  }
-  main()
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
-  
+  const cardOne = await prisma.cardSet.upsert({
+    where: { id: v4() },
+    update: {},
+    create: {
+      id: v4(),
+      // artist: "Randy Vargas",
+      // artistIds: ["d20672ca-0555-4238-a984-fd171d36b247"],
+      borderColor: "black",
+      colorIdentity: ["G"],
+      colors: ["G"],
+      convertedManaCost: 3.0,
+      edhrecRank: 5803,
+      faceConvertedManaCost: 3.0,
+      faceManaValue: 3.0,
+      faceName: "Hound Tamer",
+      finishes: ["nonfoil", "foil"],
+      flavorText: '"You and me, we\'re not built for captivity."',
+      frameVersion: "2015",
+      hasFoil: true,
+      hasNonFoil: true,
+      keywords: ["Daybound", "Trample"],
+      language: "English",
+      layout: "transform",
+      manaCost: "{2}{G}",
+      manaValue: 3.0,
+      name: "Hound Tamer // Untamed Pup",
+      number: "187",
+      // otherFaceIds: ["f75dc67c-ae5a-5ea7-b624-909d12c1012b"],
+      power: "3",
+      printings: ["DBL", "MID"],
+      rarity: "uncommon",
+      // setCode: "MID",
+      side: "a",
+      subtypes: ["Human", "Werewolf"],
+      supertypes: [],
+      text: "Trample\n{3}{G}: Put a +1/+1 counter on target creature.\nDaybound (If a player casts no spells during their own turn, it becomes night next turn.)",
+      toughness: "3",
+      type: "Creature — Human Werewolf",
+      types: ["Creature"],
+    },
+  });
+  const cardTwo = await prisma.cardSet.upsert({
+    where: { id: v4()},
+    update: {},
+    create: {
+      id: v4(),
+      // artist: "Thomas Stoop",
+      // artistIds: ["5c24d419-7a23-4285-932c-50727c9ede70"],
+      borderColor: "black",
+      colorIdentity: ["G", "W"],
+      colors: [],
+      convertedManaCost: 0.0,
+      edhrecRank: 504,
+      edhrecSaltiness: 0.09,
+      finishes: ["nonfoil", "foil"],
+      flavorText:
+        '"Urza fortified every thirty miles on the path to Tomakul, creating a network of trenches the brothers would trade for decades."\n—*The Antiquities War*',
+      frameVersion: "2015",
+      hasFoil: true,
+      hasNonFoil: true,
+      language: "English",
+      layout: "normal",
+      manaValue: 0.0,
+      name: "Brushland",
+      number: "259",
+      printings: [
+        "10E",
+        "5ED",
+        "6ED",
+        "7ED",
+        "9ED",
+        "ATH",
+        "BRO",
+        "ICE",
+        "LTC",
+        "OLEP",
+        "PBRO",
+        "PRM",
+        "PTC",
+        "WC00",
+        "WC02",
+      ],
+      rarity: "rare",
+      subtypes: [],
+      supertypes: [],
+      text: "{T}: Add {C}.\n{T}: Add {G} or {W}. Brushland deals 1 damage to you.",
+      type: "Land",
+      types: ["Land"],
+    },
+  });
+  const cardThree = await prisma.cardSet.upsert({
+    where: { id: v4()},
+    update: {},
+    create: {
+      // artistIds: ["aa7e89ed-d294-4633-9057-ce04dacfcfa4"],
+      id: v4(),
+      borderColor: "black",
+      colorIdentity: ["B", "G", "R", "U", "W"],
+      colors: ["B", "G", "R", "U", "W"],
+      convertedManaCost: 6.0,
+      edhrecRank: 3298,
+      edhrecSaltiness: 0.32,
+      faceConvertedManaCost: 0.0,
+      faceManaValue: 0.0,
+      faceName: "O-Kagachi Made Manifest",
+      finishes: ["nonfoil", "foil"],
+      frameVersion: "2015",
+      hasFoil: true,
+      hasNonFoil: true,
+      keywords: ["Flying", "Trample"],
+      language: "English",
+      layout: "transform",
+      manaValue: 6.0,
+      name: "The Kami War // O-Kagachi Made Manifest",
+      number: "489",
+      // otherFaceIds: ["136c4e09-8eeb-5878-a0aa-b67f5a267d99"],
+      power: "6",
+      printings: ["NEO", "PNEO", "PRM"],
+      rarity: "mythic",
+      side: "b",
+      subtypes: ["Dragon", "Spirit"],
+      supertypes: [],
+      text: "O-Kagachi Made Manifest is all colors.\nFlying, trample\nWhenever O-Kagachi Made Manifest attacks, defending player chooses a nonland card in your graveyard. Return that card to your hand. O-Kagachi Made Manifest gets +X/+0 until end of turn, where X is the mana value of that card.",
+      toughness: "6",
+      type: "Enchantment Creature — Dragon Spirit",
+      types: ["Enchantment", "Creature"],
+    },
+  });
+  console.log("Performed seed users.ts: ", { cardOne, cardTwo, cardThree });
+}
+main()
+  .then(async () => {
+    await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

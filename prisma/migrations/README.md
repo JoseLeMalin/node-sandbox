@@ -16,3 +16,9 @@ mkdir -p prisma/migrations/0_init
 
 // Create an initial SQL file which contains all the code to recreate the DB
 npx prisma migrate diff --from-empty --to-schema-datamodel prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql
+
+// Migrate following model changes
+//      Update DB model
+//      Make sure prisma file is correct: npx prisma format
+//      Deploy migration: npx prisma migrate dev    => Give name to new migration file
+//      
