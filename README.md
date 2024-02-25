@@ -5,7 +5,7 @@
       - Zod WIP
       - Jest Initialized
       - Websockets
-      - Swagger
+      - Swagger Ongoing
       - Buffer + Fs node module
       - multithread
       - Kafka

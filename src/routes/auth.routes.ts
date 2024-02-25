@@ -1,9 +1,9 @@
-import express from "express";
+import { Router } from "express";
 import { Request, Response, NextFunction } from "express";
 import { validateJWTHandler } from "../handlers/auth/auth.handlers";
 import { userLoginHandler } from "../handlers/users/users.handlers";
 
-export const authRouter = express.Router();
+export const authRouter = Router();
 
 authRouter.get(
   "/jwt-tests",
