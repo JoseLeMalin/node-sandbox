@@ -13,29 +13,32 @@ import { authRouter } from "./../routes/auth.routes";
 /**
  * Init of the Expressjs app
  */
-const app = express();
+export const buildExpressServer = () => {
+  const app = express();
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-app.use(logger("dev"));
-app.use(cors(), json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-// error handler
-app.use(errorHandler);
+  // view engine setup
+  app.set("views", path.join(__dirname, "views"));
+  app.set("view engine", "jade");
+  app.use(logger("dev"));
+  app.use(cors(), json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use(cookieParser());
+  app.use(express.static(path.join(__dirname, "public")));
+  // error handler
+  app.use(errorHandler);
 
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/auth", authRouter);
-app.use("/crypto-module", cryptoModuleRouter);
+  app.use("/", indexRouter);
+  app.use("/users", usersRouter);
+  app.use("/auth", authRouter);
+  app.use("/crypto-module", cryptoModuleRouter);
 
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
+  // catch 404 and forward to error handler
+  app.use(function (req, res, next) {
+    next(createError(404));
+  });
 
+  return { app };
+};
 // app.use(
 //   (
 //     err: ErrorRequestHandler,
@@ -56,10 +59,7 @@ app.use(function (req, res, next) {
 //     }
 //   },
 // );
-export { app };
 
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
-
-// module.exports = app;
