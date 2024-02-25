@@ -1,0 +1,141 @@
+# https://learn.openapis.org/specification/structure.html
+# https://app.swaggerhub.com/
+openapi: '3.1.0' 
+info:
+  title: node-sandbox
+  description: sandbox where some nodejs features are tested
+  version: '1.0'
+
+servers:
+  - url: 'http://localhost/api'
+    description: development
+  - url: 'https://staginghost/api'
+    description: staging
+  - url: 'https://productionhost/api'
+    description: production
+
+paths:
+  /users:
+    get:
+      servers:
+      - url: http://localhost/api
+      tags:
+        - Users
+      description: >-
+        Get users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        "400":
+          description: The provided parameters are incorrect
+          content:
+            text/html:
+              schema:
+                $ref: "#/components/schemas/errorMessage"
+              examples:
+                illegalCoordinates:
+                  value: "Illegal coordinates."
+                notEmpty:
+                  value: "Square is not empty."
+                invalidMark:
+                  value: "Invalid Mark (X or O)."
+        default:
+          description: Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+    post:
+      servers:
+      - url: http://localhost/api
+      tags:
+        - Users
+      description: >-
+        Create a new user
+      requestBody:
+        $ref: '#/components/schemas/UserCreate'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/User'
+
+        default:
+          description: Errors
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+
+              
+security:
+  - basicAuth: []
+
+components:
+  parameters:
+    rowParam:
+      description: New user to create
+      name: createUser
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UserCreate"
+
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    Error:
+      properties:
+        message:
+          type: string
+        stack:
+          type: string
+        axiosError:
+          type: string
+      required:
+        - message
+
+    User:
+      type: object
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [USER, ADMIN]
+    UserCreate:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+          enum: [USER, ADMIN]
