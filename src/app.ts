@@ -73,13 +73,11 @@ const { app } = buildExpressServer();
 const server = createServer(app);
 
 const { wss } = buildWebsocket(server);
-console.log("wss: ", wss);
 
 // app.use(sessionParser);
 
 server.listen(portWS, function () {
   console.log("Listening on http://localhost:8080");
-  console.log("process: ", process.env.JWT_PASSPHRASE);
 });
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
