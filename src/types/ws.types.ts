@@ -9,7 +9,7 @@ export type WSActions =
   | "Lorem5"
   | "Lorem6";
 
-export const WSActionsBis = {
+export const WSActions = {
   var: "Create",
   var1: "Lorem",
   var2: "Lorem2",
@@ -19,19 +19,19 @@ export const WSActionsBis = {
   var6: "Lorem6",
 } as const;
 
-export type WSInputData = {
-  action: string;
-  data: {
-    id: string;
-    color: number;
-  };
-};
+// export type WSInputData = {
+//   action: typeof WSActionsBis;
+//   data: {
+//     id: string;
+//     color: number;
+//   };
+// };
 
 export const WSInputSchema = z.object({
-  action: z.nativeEnum(WSActionsBis),
+  action: z.nativeEnum(WSActions),
   data: z.object({
     id: z.string(),
-    color: z.string().optional(),
+    color: z.string(),
   }),
 });
 

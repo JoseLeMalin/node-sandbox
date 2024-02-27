@@ -7,9 +7,8 @@
       - Websockets
       - Swagger Ongoing
       - Buffer + Fs node module
-      - multithread
+      - Worker threads | multithread
       - Kafka
-
 
       - Graphql ?
 
@@ -22,6 +21,8 @@ https://medium.com/@sulistef/how-to-set-up-routing-in-an-express-js-project-usin
 https://dev.to/wizdomtek/typescript-express-building-robust-apis-with-nodejs-1fln - Project Hot Reload
 https://blog.logrocket.com/configuring-nodemon-with-typescript/
 
+JWT: 
+  https://dev.to/tonieng/introduction-to-authentication-and-authorization-using-json-web-tokens-in-nodejs-p4a
 Prisma: 
   https://www.prisma.io/blog/satisfies-operator-ur8ys8ccq7zb#infer-prisma-output-types-without-prismavalidator
 
@@ -30,4 +31,8 @@ Security Best practices:
   Opaque tokens: https://cloudentity.com/developers/basics/tokens/opaque-token/
 
 Jest: 
-    https://blog.logrocket.com/testing-typescript-apps-using-jest/
+  https://blog.logrocket.com/testing-typescript-apps-using-jest/
+
+Websockets: 
+  https://medium.com/voodoo-engineering/websockets-on-production-with-node-js-bdc82d07bb9f
+  https://javascript.info/websocket
