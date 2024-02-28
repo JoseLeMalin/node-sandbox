@@ -12,7 +12,6 @@
 
       - Graphql ?
 
-
 Useful links:
 Setup:
 https://github.com/prisma/prisma-examples/blob/latest/typescript/rest-express/src/index.ts
