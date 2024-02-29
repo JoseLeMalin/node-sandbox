@@ -37,7 +37,7 @@ class CustomWebSocket extends WebSocket.WebSocket {
 export const buildWebsocket = (server: Server) => {
   const clients = new Map<WebSocket, WSMetadata>();
   const wss = new WebSocketServer({
-    server,
+    server,   // Connects the websockets on port set for the server (default 3000)
     verifyClient: (info, cb) => {
       const resultVerif = handleTokenVerification(info);
       cb(resultVerif);

@@ -72,13 +72,16 @@ const portWS = process.env.PORT || 8080;
 const { app } = buildExpressServer();
 const server = createServer(app);
 
+// Init a new instance of Websocket Server based on the Server that has been created
+// ==> WSS will listen the PORT of the Server
 const { wss } = buildWebsocket(server);
 
 // app.use(sessionParser);
-
-server.listen(portWS, function () {
-  console.log("Listening on http://localhost:8080");
+// Here the server 
+server.listen(port, function () {
+  console.log(`Listening on http://localhost:${port}`);
 });
+
 // app.listen(port, () => {
 //   console.log(`Server running at http://localhost:${port}`);
 // });
