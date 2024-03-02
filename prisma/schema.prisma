@@ -10,6 +10,8 @@ datasource db {
 
 model User {
   id            String         @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
   email         String         @unique
   name          String
   password      String
@@ -30,10 +32,12 @@ model RefreshToken {
 }
 
 model Profile {
-  id     String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  bio    String
-  userId String @unique @db.Uuid
-  user   User   @relation(fields: [userId], references: [id])
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  bio       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String   @unique @db.Uuid
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model Post {
@@ -100,6 +104,7 @@ model CardSet {
   otherFaceIds            String[]
   power                   String?
   printings               String[]
+  purchaseUrls            String[]
   rarity                  String
   side                    String?
   subsets                 String[]
@@ -136,6 +141,8 @@ model ArtistsOfCard {
 
 model Set {
   id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
   name        String
   code        String
   languages   String[]
@@ -145,10 +152,12 @@ model Set {
 }
 
 model CardInSet {
-  cardId String  @unique @db.Uuid
-  setId  String  @unique @db.Uuid
-  card   CardSet @relation(fields: [cardId], references: [id])
-  set    Set     @relation(fields: [setId], references: [id])
+  cardId    String   @unique @db.Uuid
+  setId     String   @unique @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  card      CardSet  @relation(fields: [cardId], references: [id])
+  set       Set      @relation(fields: [setId], references: [id])
 
   @@id([cardId, setId])
 }
@@ -167,20 +176,24 @@ model ForeignData {
 }
 
 model LeadershipSkills {
-  id          String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  brawl       Boolean @default(false)
-  commander   Boolean @default(false)
-  oathbreaker Boolean @default(false)
-  cardId      String  @unique @db.Uuid
-  card        CardSet @relation(fields: [cardId], references: [id])
+  id          String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  brawl       Boolean  @default(false)
+  commander   Boolean  @default(false)
+  oathbreaker Boolean  @default(false)
+  cardId      String   @unique @db.Uuid
+  card        CardSet  @relation(fields: [cardId], references: [id])
 }
 
 model Rulings {
-  id     String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  date   String
-  text   String
-  cardId String  @unique @db.Uuid
-  card   CardSet @relation(fields: [cardId], references: [id])
+  id        String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  date      String
+  text      String
+  cardId    String   @unique @db.Uuid
+  card      CardSet  @relation(fields: [cardId], references: [id])
 }
 
 enum Role {
