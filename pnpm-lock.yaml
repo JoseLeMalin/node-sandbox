@@ -12,11 +12,11 @@ dependencies:
     specifier: ^8.4.1
     version: 8.4.1
   '@prisma/adapter-pg':
-    specifier: ^5.10.2
-    version: 5.10.2(pg@8.11.3)
+    specifier: 5.11.0-integration-fix-debug-reexport.2
+    version: 5.11.0-integration-fix-debug-reexport.2(pg@8.11.3)
   '@prisma/client':
-    specifier: ^5.10.2
-    version: 5.10.2(prisma@5.10.2)
+    specifier: 5.11.0-integration-fix-debug-reexport.2
+    version: 5.11.0-integration-fix-debug-reexport.2(prisma@5.10.2)
   cookie-parser:
     specifier: ~1.4.6
     version: 1.4.6
@@ -41,6 +41,9 @@ dependencies:
   jsonwebtoken:
     specifier: ^9.0.2
     version: 9.0.2
+  kafkajs:
+    specifier: ^2.2.4
+    version: 2.2.4
   morgan:
     specifier: ~1.9.1
     version: 1.9.1
@@ -1883,18 +1886,18 @@ packages:
       fastq: 1.17.1
     dev: true
 
-  /@prisma/adapter-pg@5.10.2(pg@8.11.3):
-    resolution: {integrity: sha512-DvQ0rFkeZaxQ8rcsIhq2IUu9wgFPf47r+5ETieQ9c5LrMz0IDxVWBp1IRB2UM9a8x97SyN3l4/vK960WzPOpbQ==}
+  /@prisma/adapter-pg@5.11.0-integration-fix-debug-reexport.2(pg@8.11.3):
+    resolution: {integrity: sha512-b3URXHAOTIlPGiLGEMp76iALUUUr4dm4xkxw3axdXZsfFA2hdI2nWR+Qx4M5FPX/YoSBBv4zmxWdHOg+2an/eA==}
     peerDependencies:
       pg: ^8.11.3
     dependencies:
-      '@prisma/driver-adapter-utils': 5.10.2
+      '@prisma/driver-adapter-utils': 5.11.0-integration-fix-debug-reexport.2
       pg: 8.11.3
       postgres-array: 3.0.2
     dev: false
 
-  /@prisma/client@5.10.2(prisma@5.10.2):
-    resolution: {integrity: sha512-ef49hzB2yJZCvM5gFHMxSFL9KYrIP9udpT5rYo0CsHD4P9IKj473MbhU1gjKKftiwWBTIyrt9jukprzZXazyag==}
+  /@prisma/client@5.11.0-integration-fix-debug-reexport.2(prisma@5.10.2):
+    resolution: {integrity: sha512-EunMz8c8vM4AAoPvbGrv328mSDV0z6iXZgcC+m8ZPa92tErcc9V0UeEQQQ1p6jybAr44EHLEV5u8YsbY4uArKA==}
     engines: {node: '>=16.13'}
     requiresBuild: true
     peerDependencies:
@@ -1909,10 +1912,14 @@ packages:
   /@prisma/debug@5.10.2:
     resolution: {integrity: sha512-bkBOmH9dpEBbMKFJj8V+Zp8IZHIBjy3fSyhLhxj4FmKGb/UBSt9doyfA6k1UeUREsMJft7xgPYBbHSOYBr8XCA==}
 
-  /@prisma/driver-adapter-utils@5.10.2:
-    resolution: {integrity: sha512-Qou/js8VJSmaWiGX5EVXGF83fMZltFnuzkKFOocpDvcI3f5G9WTPf61TKflzs3ZOYe1weRgM9hUk9UR7lgGEwg==}
+  /@prisma/debug@5.11.0-integration-fix-debug-reexport.2:
+    resolution: {integrity: sha512-WX+e/XE8im2QOUSCd2x2uvdCl0zMxJ8tjRzfPwZKd226LCyyDVe/CCtkObUcA0CpoM3e6YlcBY57iPdj9d758A==}
+    dev: false
+
+  /@prisma/driver-adapter-utils@5.11.0-integration-fix-debug-reexport.2:
+    resolution: {integrity: sha512-VFIL5iMtK08NXefPG4X4YJXBdtOXXtVW605go5ijEDOxH2XlLN3Ct7nPVYK8yUqN60G2wqAH90DI5h2qrA4tgw==}
     dependencies:
-      '@prisma/debug': 5.10.2
+      '@prisma/debug': 5.11.0-integration-fix-debug-reexport.2
     dev: false
 
   /@prisma/engines-version@5.10.0-34.5a9203d0590c951969e85a7d07215503f4672eb9:
@@ -4545,6 +4552,11 @@ packages:
     dependencies:
       jwa: 1.4.1
       safe-buffer: 5.2.1
+    dev: false
+
+  /kafkajs@2.2.4:
+    resolution: {integrity: sha512-j/YeapB1vfPT2iOIUn/vxdyKEuhuY2PxMBvf5JWux6iSaukAccrMtXEY/Lb7OvavDhOWME589bpLrEdnVHjfjA==}
+    engines: {node: '>=14.0.0'}
     dev: false
 
   /keyv@3.1.0:
