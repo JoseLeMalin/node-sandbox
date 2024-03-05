@@ -36,3 +36,9 @@ Jest:
 Websockets: 
   https://medium.com/voodoo-engineering/websockets-on-production-with-node-js-bdc82d07bb9f
   https://javascript.info/websocket
+
+Kafka:
+  Docker: Install locally the image: confluentinc/cp-zookeeper
+  Install the Confluent CLI from: https://github.com/confluentinc/cli/releases/latest
+  Install Kafka Locally: https://developer.confluent.io/quickstart/kafka-local/
+  https://developer.confluent.io/get-started/nodejs/#create-project
