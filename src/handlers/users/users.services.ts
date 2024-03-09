@@ -2,7 +2,7 @@ import { prisma } from "../../lib/prisma";
 import { v4 } from "uuid";
 import { CreateUser } from "../../types/Users";
 import { verifyPassword } from "../crypto-module/crypto-module.services";
-import { findUserByEmail } from "./prisma-queries";
+import { findUserByEmail, findUserById } from "./prisma-queries";
 import { ApiError, messageCode } from "../../utils/express/errors";
 
 export const loginService = async (email: string, password: string) => {
@@ -33,6 +33,12 @@ export const loginService = async (email: string, password: string) => {
   //   );
 
   // return true;
+};
+export const getUserService = async (id: string) => {
+  const user = await findUserById(id);
+  if (!user)
+    throw new ApiError(404, messageCode.USER_NOT_FOUND, "User not found");
+  return user;
 };
 
 export const createUserByEmailAndPasswordService = async (user: CreateUser) => {

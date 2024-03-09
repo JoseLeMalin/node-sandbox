@@ -55,11 +55,11 @@
 //   },
 // );
 
-import session from "express-session";
+// import session from "express-session";
 import { buildExpressServer } from "./server/express.server";
-import { buildWebsocket } from "./server/ws.server";
 import { createServer } from "http";
-import { clientreceiver, testProducer } from "./lib/kafka/config.kafka";
+import { ConsumerFactoryBis } from "./lib/kafka/consomer.kafka";
+import { ApiError, messageCode } from "./utils/express/errors";
 
 // const sessionParser = session({
 //   saveUninitialized: false,
@@ -68,25 +68,33 @@ import { clientreceiver, testProducer } from "./lib/kafka/config.kafka";
 // });
 
 const port = process.env.PORT || 3000;
-const portWS = process.env.PORT || 8080;
+// const portWS = process.env.PORT || 8080;
 
 const { app } = buildExpressServer();
 const server = createServer(app);
-const test = async () => {
-  console.log("Testting kafka entry");
 
-  await testProducer();
-  await clientreceiver();
-  console.log("Testting kafka exit");
-};
 // Init a new instance of Websocket Server based on the Server that has been created
 // ==> WSS will listen the PORT of the Server
-const { wss } = buildWebsocket(server);
+// const { wss } = buildWebsocket(server);
 try {
-  
-  test();
+  if (
+    !process.env.KAFKA_PRODUCER_CLIENTID ||
+    !process.env.KAFKA_BROKER ||
+    !process.env.KAFKA_GROUPID
+  )
+    throw new ApiError(
+      500,
+      messageCode.MISSING_ENV_VARIABLE,
+      "Missing Kafka Producer ClientId",
+    );
+  const { start } = ConsumerFactoryBis(
+    process.env.KAFKA_PRODUCER_CLIENTID,
+    [process.env.KAFKA_BROKER],
+    process.env.KAFKA_GROUPID,
+  );
+  start();
 } catch (error) {
-  console.log("This is the error: " , error);
+  console.log("This is the error: ", error);
 }
 // app.use(sessionParser);
 // Here the server

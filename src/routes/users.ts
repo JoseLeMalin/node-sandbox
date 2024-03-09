@@ -1,18 +1,24 @@
-import express from "express";
-import { Request, Response, NextFunction } from "express";
-import { userCreate, userLoginHandler } from "../handlers/users/users.handlers";
+import { Request, Response, NextFunction, Router } from "express";
+import { getUserHandler, userCreate } from "../handlers/users/users.handlers";
 
-export const usersRouter = express.Router();
+export const usersRouter = Router();
+// const kafka = new Kafka({
+//   clientId: "my-app",
+//   brokers: ["localhost:9092", "localhost:8082"],
+// });
+// 
+// export const kafkaUserProducer = kafka.producer();
+// export const kafkaUserConsumer = kafka.consumer({ groupId: "test-group" });
 
 /* GET users listing. */
 usersRouter.get(
-  "/",
+  "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       console.log("In the users get endpoint");
 
-      res.status(201);
-      res.send(`respond with a resource`);
+      const user = await getUserHandler(req);
+      res.status(201).send(user);
     } catch (error) {
       next(error);
     }

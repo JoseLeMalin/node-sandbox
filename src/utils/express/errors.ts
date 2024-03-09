@@ -6,6 +6,7 @@ export enum messageCode {
   FILEREAD_FAILED = "FILEREAD_FAILED",
   MISSING_ENV_VARIABLE = "MISSING_ENV_VARIABLE",
   UNHANDLED_ERROR = "UNHANDLED_ERROR",
+  USER_NOT_FOUND = "USER_NOT_FOUND",
 }
 
 export class ApiError extends Error {
