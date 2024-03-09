@@ -7,6 +7,7 @@
     "format": "pnpm exec prettier src/ --write",
     "build": "tsc -p .",
     "docker:build": "docker-compose --file docker/compose.yaml up --build",
+    "docker:down": "docker-compose --file docker/compose.yaml down",
     "seed": "npx ts-node ./prisma/seeders/mtg-cards.ts",
     "dev": "npx @dotenvx/dotenvx run --env-file=.env.dev -- nodemon src/app.ts",
     "devbis&": "dotenvx run --env-file=.env.dev -- ts-node src/app.ts",

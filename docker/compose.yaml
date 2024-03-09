@@ -7,20 +7,20 @@ version: '3.8'
 # docker compose -f .docker/compose.yaml down
 name: node-sandbox-container
 services:
-  node-sandbox-app:
-    build:
-      context: ../ 
-      dockerfile: docker/dockerfile
-    container_name: node-sandbox-app
-    # environment:
-    #   - POSTGRES_USER=${POSTGRES_USER}
-    #   - POSTGRES_PASSWORD=${POSTGRES_PW}
-    #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
-    env_file:
-      - ../.env.dev
-    ports:
-      - "3000:3000"
-    restart: unless-stopped
+  # node-sandbox-app:
+  #   build:
+  #     context: ../ 
+  #     dockerfile: docker/dockerfile
+  #   container_name: node-sandbox-app
+  #   # environment:
+  #   #   - POSTGRES_USER=${POSTGRES_USER}
+  #   #   - POSTGRES_PASSWORD=${POSTGRES_PW}
+  #   #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
+  #   env_file:
+  #     - ../.env.dev
+  #   ports:
+  #     - "3000:3000"
+  #   restart: unless-stopped
   node-sandbox-postgres:
     container_name: node-sandbox-postgres
     image: postgres:15.5-alpine3.18
@@ -67,20 +67,20 @@ services:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: 'CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT'
-      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://broker:29092,PLAINTEXT_HOST://localhost:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://localhost:9092,PLAINTEXT_HOST://localhost:9092'
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_PROCESS_ROLES: 'broker,controller'
-      KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
-      KAFKA_LISTENERS: 'PLAINTEXT://broker:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
-      KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
-      KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
-      KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
-      KAFKA_REST_HOST_NAME: rest-proxy
-      KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
-      KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
+      # KAFKA_PROCESS_ROLES: 'broker,controller'
+      # KAFKA_CONTROLLER_QUORUM_VOTERS: '1@broker:29093'
+      # KAFKA_LISTENERS: 'PLAINTEXT://localhost:29092,CONTROLLER://broker:29093,PLAINTEXT_HOST://0.0.0.0:9092'
+      # KAFKA_INTER_BROKER_LISTENER_NAME: 'PLAINTEXT'
+      # KAFKA_CONTROLLER_LISTENER_NAMES: 'CONTROLLER'
+      # KAFKA_LOG_DIRS: '/tmp/kraft-combined-logs'
+      # KAFKA_REST_HOST_NAME: rest-proxy
+      # KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
+      KAFKA_REST_LISTENERS: "http://localhost:8082"
       CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
   # pgadmin:
   #   container_name: youcode-pgadmin

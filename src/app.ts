@@ -59,6 +59,7 @@ import session from "express-session";
 import { buildExpressServer } from "./server/express.server";
 import { buildWebsocket } from "./server/ws.server";
 import { createServer } from "http";
+import { clientreceiver, testProducer } from "./lib/kafka/config.kafka";
 
 // const sessionParser = session({
 //   saveUninitialized: false,
@@ -71,13 +72,24 @@ const portWS = process.env.PORT || 8080;
 
 const { app } = buildExpressServer();
 const server = createServer(app);
+const test = async () => {
+  console.log("Testting kafka entry");
 
+  await testProducer();
+  await clientreceiver();
+  console.log("Testting kafka exit");
+};
 // Init a new instance of Websocket Server based on the Server that has been created
 // ==> WSS will listen the PORT of the Server
 const { wss } = buildWebsocket(server);
-
+try {
+  
+  test();
+} catch (error) {
+  console.log("This is the error: " , error);
+}
 // app.use(sessionParser);
-// Here the server 
+// Here the server
 server.listen(port, function () {
   console.log(`Listening on http://localhost:${port}`);
 });
