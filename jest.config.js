@@ -15,6 +15,7 @@ module.exports = {
   // },
   testMatch: [
     "<rootDir>/__tests__/*.(ts|js)?(x)",
+    "<rootDir>/src/__tests__/*.(ts|js)?(x)",
   ],
   verbose: true,
   moduleFileExtensions: ['ts', 'js'],
