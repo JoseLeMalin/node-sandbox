@@ -59,5 +59,7 @@ jobs:
     - name: Install dependencies
       run: pnpm install
     # - run: pnpm ci
+    - run: pnpm lint
+    - run: pnpm format
     - run: pnpm build
     - run: pnpm test

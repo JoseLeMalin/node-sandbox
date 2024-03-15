@@ -33,7 +33,6 @@ export const generateAccessToken = async (userId: string) => {
   const signedJwt = jwt.sign({ userId: userId }, privateKey, signOptions);
   console.log("signedJwt SHE: ", signedJwt);
 
-
   return signedJwt;
 };
 

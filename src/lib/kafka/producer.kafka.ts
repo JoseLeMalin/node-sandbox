@@ -95,7 +95,7 @@ export const ProducerFactory = () => {
 export const ProducerFactoryBis = (clientId: string, brokers: string[]) => {
   const newProducer = () => {
     console.log("Do we come here ?");
-    
+
     const kafka = new Kafka({
       clientId: clientId,
       brokers: brokers,
@@ -119,7 +119,7 @@ export const ProducerFactoryBis = (clientId: string, brokers: string[]) => {
         messageCode.MISSING_ENV_VARIABLE,
         "Missing Kafka Consumer ClientId",
       );
-      console.log("Reaching here sendMessages?");
+    console.log("Reaching here sendMessages?");
     await producer.send({
       topic: process.env.KAFKA_TOPIC,
       messages,

@@ -27,14 +27,12 @@ export const ConsumerFactory = () => {
   };
 
   const start = async () => {
-    if (
-        !process.env.KAFKA_TOPIC
-      )
-        throw new ApiError(
-          500,
-          messageCode.MISSING_ENV_VARIABLE,
-          "Missing Kafka Consumer ClientId",
-        );
+    if (!process.env.KAFKA_TOPIC)
+      throw new ApiError(
+        500,
+        messageCode.MISSING_ENV_VARIABLE,
+        "Missing Kafka Consumer ClientId",
+      );
     const topic: ConsumerSubscribeTopics = {
       topics: ["example-topic"],
       fromBeginning: false,
@@ -99,7 +97,11 @@ export const ConsumerFactory = () => {
     startBatchConsumer,
   };
 };
-export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId: string) => {
+export const ConsumerFactoryBis = (
+  clientId: string,
+  brokers: string[],
+  groupId: string,
+) => {
   const newConsumer = () => {
     const kafka = new Kafka({
       clientId,
@@ -111,14 +113,12 @@ export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId:
   // const messageProcessor: ExampleMessageProcessor;
   const consumer = newConsumer();
   const start = async () => {
-    if (
-        !process.env.KAFKA_TOPIC
-      )
-        throw new ApiError(
-          500,
-          messageCode.MISSING_ENV_VARIABLE,
-          "Missing Kafka Consumer ClientId",
-        );
+    if (!process.env.KAFKA_TOPIC)
+      throw new ApiError(
+        500,
+        messageCode.MISSING_ENV_VARIABLE,
+        "Missing Kafka Consumer ClientId",
+      );
     const topic: ConsumerSubscribeTopics = {
       topics: [process.env.KAFKA_TOPIC],
       fromBeginning: false,
@@ -173,7 +173,6 @@ export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId:
     await consumer.disconnect();
   };
 
-
   return {
     consumer,
     newConsumer,
@@ -186,22 +185,22 @@ export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId:
 // export default class ExampleConsumerClass {
 //   private kafkaConsumer: Consumer;
 //   private messageProcessor: ExampleMessageProcessor;
-// 
+//
 //   public constructor(messageProcessor: ExampleMessageProcessor) {
 //     this.messageProcessor = messageProcessor;
 //     this.kafkaConsumer = this.createKafkaConsumer();
 //   }
-// 
+//
 //   public async startConsumer(): Promise<void> {
 //     const topic: ConsumerSubscribeTopics = {
 //       topics: ["example-topic"],
 //       fromBeginning: false,
 //     };
-// 
+//
 //     try {
 //       await this.kafkaConsumer.connect();
 //       await this.kafkaConsumer.subscribe(topic);
-// 
+//
 //       await this.kafkaConsumer.run({
 //         eachMessage: async (messagePayload: EachMessagePayload) => {
 //           const { topic, partition, message } = messagePayload;
@@ -213,13 +212,13 @@ export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId:
 //       console.log("Error: ", error);
 //     }
 //   }
-// 
+//
 //   public async startBatchConsumer(): Promise<void> {
 //     const topic: ConsumerSubscribeTopics = {
 //       topics: ["example-topic"],
 //       fromBeginning: false,
 //     };
-// 
+//
 //     try {
 //       await this.kafkaConsumer.connect();
 //       await this.kafkaConsumer.subscribe(topic);
@@ -236,11 +235,11 @@ export const ConsumerFactoryBis = (clientId: string, brokers: string[], groupId:
 //       console.log("Error: ", error);
 //     }
 //   }
-// 
+//
 //   public async shutdown(): Promise<void> {
 //     await this.kafkaConsumer.disconnect();
 //   }
-// 
+//
 //   private createKafkaConsumer(): Consumer {
 //     const kafka = new Kafka({
 //       clientId: "client-id",

@@ -1,5 +1,5 @@
 import { IncomingMessage, Server } from "http";
-import { WebSocket, WebSocketServer, RawData } from "ws";
+import { WebSocket, WebSocketServer } from "ws";
 import { v4 } from "uuid";
 import { WSInputSchema } from "../types/ws.types";
 // import { verify } from "jsonwebtoken";
@@ -37,7 +37,7 @@ class CustomWebSocket extends WebSocket.WebSocket {
 export const buildWebsocket = (server: Server) => {
   const clients = new Map<WebSocket, WSMetadata>();
   const wss = new WebSocketServer({
-    server,   // Connects the websockets on port set for the server (default 3000)
+    server, // Connects the websockets on port set for the server (default 3000)
     verifyClient: (info, cb) => {
       const resultVerif = handleTokenVerification(info);
       cb(resultVerif);
@@ -55,7 +55,7 @@ export const buildWebsocket = (server: Server) => {
     });
   }, 30000);
 
-  wss.on("connection", (ws, request) => {
+  wss.on("connection", (ws) => {
     ws.isAlive = true;
     const id = v4();
     const color = Math.floor(Math.random() * 360);
@@ -117,6 +117,8 @@ export const buildWebsocket = (server: Server) => {
     secure: boolean;
     req: IncomingMessage;
   }) => {
+    console.log("info: ", info);
+
     return true;
     // const token = info.req.headers.token;
     // if (!token) {

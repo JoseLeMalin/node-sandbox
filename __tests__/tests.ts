@@ -13,3 +13,13 @@ describe("sum module", () => {
 test("adds 2 + 3 to equal 5", () => {
   expect(sum(2, 3)).toBe(5);
 });
+
+
+test('the fetch fails with an error', async () => {
+  expect.assertions(1);
+  try {
+    // await getUserHandler();
+  } catch (error) {
+    expect(error).toMatch('error');
+  }
+});

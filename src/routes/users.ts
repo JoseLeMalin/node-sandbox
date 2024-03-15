@@ -6,7 +6,7 @@ export const usersRouter = Router();
 //   clientId: "my-app",
 //   brokers: ["localhost:9092", "localhost:8082"],
 // });
-// 
+//
 // export const kafkaUserProducer = kafka.producer();
 // export const kafkaUserConsumer = kafka.consumer({ groupId: "test-group" });
 
