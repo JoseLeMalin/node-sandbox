@@ -20,7 +20,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18]
+        node-version: [18.17.0]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -57,6 +57,6 @@ jobs:
 
     - name: Install dependencies
       run: pnpm install
-    # - run: pnpm ci
-    # - run: pnpm build
+    - run: pnpm ci
+    - run: pnpm build
     - run: pnpm test
