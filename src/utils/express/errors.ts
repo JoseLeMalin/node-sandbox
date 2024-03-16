@@ -7,6 +7,7 @@ export enum messageCode {
   MISSING_ENV_VARIABLE = "MISSING_ENV_VARIABLE",
   UNHANDLED_ERROR = "UNHANDLED_ERROR",
   USER_NOT_FOUND = "USER_NOT_FOUND",
+  CARD_NOT_FOUND = "CARD_NOT_FOUND",
 }
 
 export class ApiError extends Error {

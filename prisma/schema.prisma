@@ -114,8 +114,9 @@ model CardSet {
   toughness               String?
   type                    String
   types                   String[]
+  setId                   String            @db.Uuid
   artists                 ArtistsOfCard?
-  CardInSet               CardInSet?
+  set                     Set               @relation(fields: [setId], references: [id], onDelete: Cascade)
   foreignData             ForeignData?
   leadershipSkills        LeadershipSkills?
   rulings                 Rulings?
@@ -140,26 +141,15 @@ model ArtistsOfCard {
 }
 
 model Set {
-  id          String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   name        String
   code        String
   languages   String[]
   type        String
   releaseDate DateTime
-  CardInSet   CardInSet?
-}
-
-model CardInSet {
-  cardId    String   @unique @db.Uuid
-  setId     String   @unique @db.Uuid
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  card      CardSet  @relation(fields: [cardId], references: [id])
-  set       Set      @relation(fields: [setId], references: [id])
-
-  @@id([cardId, setId])
+  cards       CardSet[]
 }
 
 model ForeignData {

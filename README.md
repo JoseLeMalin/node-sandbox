@@ -2,7 +2,7 @@
       - postgres OK
       - Prisma WIP
       - JWT WIP <= Will have to go work again on that
-      - Zod WIP
+      - Zod
       - Jest Initialized
       - Websockets
       - Swagger Ongoing
