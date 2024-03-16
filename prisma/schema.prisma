@@ -68,7 +68,7 @@ model Tag {
 model CardSet {
   id                      String            @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   createdAt               DateTime          @default(now())
-  updatedAt               DateTime          @updatedAt
+  updatedAt               DateTime?         @updatedAt
   asciiName               String?
   attractionLights        Int[]
   borderColor             String

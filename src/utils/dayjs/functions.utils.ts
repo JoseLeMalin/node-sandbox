@@ -7,6 +7,11 @@ dayjs.extend(utc);
 export const getUTCFormattedDate = (date?: string) => {
   if (!date) return dayjs().utc().toISOString();
   return dayjs(date).utc().toISOString();
+}
+;
+export const getUTCDatePostGres = (date?: string) => {
+  if (!date) return dayjs().utc().toDate();
+  return dayjs(date).utc().toDate();
 };
 
 export const sortAscendDates = (datesToSort: string[]) =>
