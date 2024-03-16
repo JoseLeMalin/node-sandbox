@@ -1,15 +1,15 @@
 import { Request } from "express";
+import { z } from "zod";
+import { v4 } from "uuid";
 import {
   loginService,
   createUserByEmailAndPasswordService,
   getUserService,
 } from "./users.services";
-import { z } from "zod";
 import { ApiError, messageCode } from "../../utils/express/errors";
 import { hashTextService } from "../crypto-module/crypto-module.services";
 import { schemaCreateUser } from "../../types/Users";
 import { ProducerFactoryBis } from "../../lib/kafka/producer.kafka";
-import { v4 } from "uuid";
 
 if (
   !process.env.KAFKA_PRODUCER_CLIENTID ||

@@ -9,6 +9,7 @@ import { usersRouter } from "./../routes/users";
 import { cryptoModuleRouter } from "./../routes/crypto-module";
 import { errorHandler } from "./../utils/express/errors";
 import { authRouter } from "./../routes/auth.routes";
+import { cardsRouter } from "../routes/cards.routes.";
 
 /**
  * Init of the Expressjs app
@@ -31,6 +32,7 @@ export const buildExpressServer = () => {
   app.use("/users", usersRouter);
   app.use("/auth", authRouter);
   app.use("/crypto-module", cryptoModuleRouter);
+  app.use("/cards", cardsRouter);
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
