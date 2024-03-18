@@ -5,3 +5,5 @@ dist/*
 *.pem
 coverage
 db_local
+terraform.tfstate.backup
+.terraform/providers/*
