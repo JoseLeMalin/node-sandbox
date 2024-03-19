@@ -7,20 +7,6 @@ version: '3.8'
 # docker compose -f .docker/compose.yaml down
 name: node-sandbox-container
 services:
-  # node-sandbox-app:
-  #   build:
-  #     context: ../ 
-  #     dockerfile: docker/dockerfile
-  #   container_name: node-sandbox-app
-  #   # environment:
-  #   #   - POSTGRES_USER=${POSTGRES_USER}
-  #   #   - POSTGRES_PASSWORD=${POSTGRES_PW}
-  #   #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
-  #   env_file:
-  #     - ../.env.dev
-  #   ports:
-  #     - "3000:3000"
-  #   restart: unless-stopped
   node-sandbox-postgres:
     container_name: node-sandbox-postgres
     image: postgres:15.5-alpine3.18
@@ -82,6 +68,21 @@ services:
       # KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
       KAFKA_REST_LISTENERS: "http://localhost:8082"
       CLUSTER_ID: '4L6g3nShT-eMCtK--X86sw'
+      
+  node-sandbox-app:
+    build:
+      context: ../ 
+      dockerfile: docker/dockerfile
+    container_name: node-sandbox-app
+    # environment:
+    #   - POSTGRES_USER=${POSTGRES_USER}
+    #   - POSTGRES_PASSWORD=${POSTGRES_PW}
+    #   - POSTGRES_DB=${POSTGRES_DB} #optional (specify default database instead of $POSTGRES_DB)
+    env_file:
+      - ../.env.dev
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
   # pgadmin:
   #   container_name: youcode-pgadmin
   #   image: dpage/pgadmin4:latest

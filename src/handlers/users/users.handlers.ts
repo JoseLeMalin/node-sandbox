@@ -44,11 +44,6 @@ export const userLoginHandler = async (req: Request) => {
 
 export const getUserHandler = async (req: Request) => {
   await start();
-  await sendMessages([
-    { key: v4(), value: "This is the getUserHandler Message" },
-  ]);
-
-  await shutdown();
   const userSchema = z.object({
     id: z.string().uuid(),
   });
@@ -61,20 +56,25 @@ export const getUserHandler = async (req: Request) => {
     );
   //  await customShutdown();
 
+  await sendMessages([
+    { key: v4(), value: `The id entered: ${parsedBody.data.id}` },
+  ]);
+
+  await shutdown();
   return await getUserService(parsedBody.data.id);
 };
 
 export const userCreate = async (req: Request) => {
   try {
     const userToCreate = schemaCreateUser.parse(req.body);
-    console.log(" userToCreate SHE: ", userToCreate);
+    // console.log(" userToCreate SHE: ", userToCreate);
     const hashedPwd = await hashTextService(req.body.password);
     // const userId = v4();
     // const { accessToken, refreshToken } = await generateTokens(userId, v4());
 
     userToCreate.password = hashedPwd;
     const createdUser = await createUserByEmailAndPasswordService(userToCreate);
-    console.log("createdUser SHE: ", createdUser);
+    // console.log("createdUser SHE: ", createdUser);
     // console.log("refreshToken SHE: ", refreshToken);
     // console.log("accessToken SHE: ", accessToken);
     return createdUser;
